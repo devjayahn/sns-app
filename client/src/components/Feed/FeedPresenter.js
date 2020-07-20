@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
-import Moment from 'react-moment';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = theme => ({
     root: {
@@ -28,11 +26,11 @@ const styles = theme => ({
     }
   });
 
-class Feed extends Component {
+class FeedPresenter extends Component {
     render() {
-    const { classes } = this.props;
-     return(
-        <div className={classes.body}>
+        const { classes } = this.props;
+        return(
+         <div className={classes.body}>
             <div className={classes.root}>            
             <Avatar alt="profile_image" src="http://placeimg.com/180/180/1" /><p className={classes.id}>{this.props.user_id}</p>
             </div>
@@ -49,34 +47,32 @@ class Feed extends Component {
             <p className={classes.like}>좋아요 {this.props.likeit}개</p>
             <p>{this.props.context}</p>
             <p className={classes.create_at}><TimeForToday create_at={this.props.create_at}/></p>        
-        </div>        
-        )
-    }
+        </div>
+    )}
 }
 
-
-function TimeForToday({create_at}) {  
-  const today = new Date();
-  const timeValue = new Date(create_at);
+ function TimeForToday({create_at}) {  
+    const today = new Date();
+    const timeValue = new Date(create_at);
+    
+    const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
   
-  const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-
-  if (betweenTime < 1) return '방금 전';
-  if (betweenTime < 60) {
-      return `${betweenTime}분 전`;
+    if (betweenTime < 1) return '방금 전';
+    if (betweenTime < 60) {
+        return `${betweenTime}분 전`;
+    }
+  
+    const betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+        return `${betweenTimeHour}시간 전`;
+    }
+  
+    const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+        return `${betweenTimeDay}일 전`;
+    }
+  
+    return `${Math.floor(betweenTimeDay / 365)}년 전`;
   }
-
-  const betweenTimeHour = Math.floor(betweenTime / 60);
-  if (betweenTimeHour < 24) {
-      return `${betweenTimeHour}시간 전`;
-  }
-
-  const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-  if (betweenTimeDay < 365) {
-      return `${betweenTimeDay}일 전`;
-  }
-
-  return `${Math.floor(betweenTimeDay / 365)}년 전`;
-}
-
-export default withStyles(styles)(Feed);
+  
+  export default withStyles(styles)(FeedPresenter);

@@ -26,7 +26,7 @@ const upload = multer({dest: './upload'})
 
 app.get('/api/feed', (req, res) => {
     connection.query(
-      "SELECT feed_number, user_id, context, feed_image, likeit, STR_TO_DATE(create_at,'%Y-%m-%d %H:%i:%S') as create_at, STR_TO_DATE(update_at,'%Y-%m-%d g') as update_at FROM SNS.FEED",
+      "SELECT feed_number, user_id, context, feed_image, likeit, STR_TO_DATE(create_at,'%Y-%m-%d %H:%i:%S') as create_at, STR_TO_DATE(update_at,'%Y-%m-%d g') as update_at FROM SNS.FEED order by create_at desc",
       (err, rows, fields) => {        
         res.send(rows);
         

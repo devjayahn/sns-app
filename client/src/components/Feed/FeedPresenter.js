@@ -23,6 +23,14 @@ const styles = theme => ({
     },
     id: {
       paddingTop: '8px'
+    },
+    body: {
+      width: '50%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: 'auto',
+      marginTop: '5px',
+      display: 'block'
     }
   });
 
@@ -30,7 +38,7 @@ class FeedPresenter extends Component {
     render() {
         const { classes } = this.props;
         return(
-         <div className={classes.body}>
+          <div className={classes.body}>          
             <div className={classes.root}>            
             <Avatar alt="profile_image" src="http://placeimg.com/180/180/1" /><p className={classes.id}>{this.props.user_id}</p>
             </div>

@@ -90,11 +90,9 @@ class Navigator extends Component {
                 <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" align="center" noWrap>
-                <Link to="/">INSTAGRAM</Link> 
-            </Typography>
-            <Router>
-            <Link to="/feeds" ><AccountCircle /></Link>
-            </Router>
+                <Link to="/home">INSTAGRAM</Link> 
+            </Typography>            
+            <Link to="/feeds" ><AccountCircle /></Link>            
                 <div className={classes.search}>
                 <div className={classes.searchIcon}>
                 <SearchIcon />

@@ -11,10 +11,7 @@ const styles = theme => ({
       '& > *': {
         margin: theme.spacing(1),        
       },
-    },
-    body: {
-      padding: '10px'
-    },
+    },    
     like: {
       fontWeight: 'bold'
     },
@@ -30,7 +27,9 @@ const styles = theme => ({
       justifyContent: 'center',
       margin: 'auto',
       marginTop: '5px',
-      display: 'block'
+      display: 'block',
+      backgroundColor: 'white',
+      padding: '10px'
     }
   });
 
@@ -38,9 +37,9 @@ class FeedPresenter extends Component {
     render() {
         const { classes } = this.props;
         return(
-          <div className={classes.body}>          
+          <div className={classes.body}>                
             <div className={classes.root}>            
-            <Avatar alt="profile_image" src="http://placeimg.com/180/180/1" /><p className={classes.id}>{this.props.user_id}</p>
+            <Avatar alt="profile_image" src={this.props.profile_image} /><p className={classes.id}>{this.props.user_id}</p>
             </div>
             <hr/>
             <img src={this.props.feed_image} alt={this.props.user_id}></img>

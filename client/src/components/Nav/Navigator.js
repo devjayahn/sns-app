@@ -10,7 +10,6 @@ import { fade } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from "react-router-dom";
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 const styles = theme => ({
     root: {
@@ -23,7 +22,7 @@ const styles = theme => ({
       flexGrow: 1,
       display: 'none',    
       [theme.breakpoints.up('sm')]: {     
-        display: 'block',
+        display: 'block'        
       },
     },
     search: {
@@ -71,7 +70,10 @@ const styles = theme => ({
       justifyContent: 'center',
       margin: 'auto',
       marginTop: '5px',
-      display: 'block'
+      display: 'block'      
+    },
+    link: {
+      textDecoration: 'none'
     }
   });
 
@@ -79,7 +81,7 @@ class Navigator extends Component {
     render() {
         const { classes } = this.props;
         return(        
-        <AppBar position="static" color="default">
+        <AppBar position="static" color="white">
             <Toolbar>
             <IconButton
                 edge="start"
@@ -90,7 +92,7 @@ class Navigator extends Component {
                 <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" align="center" noWrap>
-                <Link to="/home">INSTAGRAM</Link> 
+                <Link to="/home" className={classes.link}>INSTAGRAM</Link> 
             </Typography>            
             <Link to="/feeds" ><AccountCircle /></Link>            
                 <div className={classes.search}>

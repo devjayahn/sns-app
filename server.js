@@ -34,6 +34,24 @@ app.get('/api/feed', (req, res) => {
     )
 });
 
+app.get('/api/feed/id', (req, res) => {
+  connection.query(
+      "select u.user_id, u.profile_image from sns.feed f INNER JOIN sns.user u ON f.user_id = u.user_id order by f.create_at desc",
+      (err, rows) => {
+        res.send(rows);
+      }
+  )
+});
+  
+
+app.get('/api/:id', (req, res) => {
+  let sql = 'SELECT * FROM SNS.USER WHERE user_id = ?';
+  var id = req.params.id;  
+  connection.query(sql, [id], (err, rows) => {
+    res.send(rows);
+  })
+});
+
 app.use('/image', express.static('./upload'));
 
 app.post('/api/customers', upload.single('image'), (req, res) => {

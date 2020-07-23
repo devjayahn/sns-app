@@ -10,7 +10,7 @@ class HeaderContainer extends Component {
         }
       }
       _callApi = async () => {                
-        const response = await fetch('/api/'+this.props.match.params.id)
+        const response = await fetch('/api/profile/'+this.props.id)
         const body = response.json();
         return body;
       }
@@ -21,15 +21,13 @@ class HeaderContainer extends Component {
           .catch(err => console.log(err));
       }
 
-      
-
     render() {
       
         return(
             <div>              
             {
                 this.state.profile ? this.state.profile.map(p => {return(<HeaderPresenter user_id={p.user_id} profile_image={p.profile_image} introduce={p.introduce} />)})             
-              : "user not exist"} 
+              : "Loading"} 
             </div>)
     }
 }

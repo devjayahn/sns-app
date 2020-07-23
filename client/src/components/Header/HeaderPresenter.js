@@ -4,23 +4,31 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     large: {
-        width: theme.spacing(17),
-        height: theme.spacing(17),
+        width: theme.spacing(18),
+        height: theme.spacing(18),
         justifyContent: 'left',
-        marginRight: '40px'
+        marginLeft: '10px',
+        marginRight: '100px'
       },
       body: {
         width: '50%',
         alignItems: 'center',        
         margin: 'auto',
-        marginTop: '5px',        
-        padding: '10px',
+        marginTop: '15px',        
+        padding: '20px',
         display: 'flex',
         marginBottom: '44px'        
       },     
       text: {
         justifyContent: 'flex-end'
-      }    
+      },
+      id: {
+          fontSize: '25px',
+          marginBottom: '20px'
+      },
+      introduce: {
+          marginTop: '20px'
+      }
   });
 
 class HeaderPresenter extends Component {
@@ -32,19 +40,17 @@ class HeaderPresenter extends Component {
                    <Avatar src={this.props.profile_image} alt={this.props.user_id} className={classes.large}/> 
                 </div>
                 <div className={classes.text}>
-                    <div>
+                    <div className={classes.id}>
                         {this.props.user_id}
                     </div>
                     <div>
-                        follower
-                    </div>
-                    <div>
-                        follow
-                    </div>
-                    <div>
-                        {this.props.introduce}
+                        <p>Follower 0 Follow 0</p>
+                    </div>                   
+                    <div className={classes.introduce}>
+                        {this.props.introduce}                        
                     </div>
                 </div>
+                <hr></hr>
             </div>
         )
     }

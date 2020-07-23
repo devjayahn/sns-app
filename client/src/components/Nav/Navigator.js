@@ -73,7 +73,8 @@ const styles = theme => ({
       display: 'block'      
     },
     link: {
-      textDecoration: 'none'
+      textDecoration: 'none',
+      color: 'black'
     }
   });
 

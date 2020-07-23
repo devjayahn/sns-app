@@ -4,12 +4,15 @@ import Avatar from '@material-ui/core/Avatar';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CommentIcon from '@material-ui/icons/Comment';
 import IconButton from '@material-ui/core/IconButton';
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
     root: {
       display: 'flex',
       '& > *': {
-        margin: theme.spacing(1),        
+        margin: theme.spacing(1),  
+        textDecoration: 'none',
+        color: 'black'      
       },
     },    
     like: {
@@ -39,7 +42,7 @@ class FeedPresenter extends Component {
         return(
           <div className={classes.body}>                
             <div className={classes.root}>            
-            <Avatar alt="profile_image" src={this.props.profile_image} /><p className={classes.id}>{this.props.user_id}</p>
+            <Link to={this.props.user_id} className={classes.root}><Avatar alt="profile_image" src={this.props.profile_image} /><p className={classes.id}>{this.props.user_id}</p></Link>
             </div>
             <hr/>
             <img src={this.props.feed_image} alt={this.props.user_id}></img>

@@ -33,6 +33,13 @@ const styles = theme => ({
       display: 'block',
       backgroundColor: 'white',
       padding: '10px'
+    },
+    spanId: {
+      marginRight: '10px',      
+      fontWeight: 'bold'
+    },
+    spanContext: {
+      
     }
   });
 
@@ -55,7 +62,7 @@ class FeedPresenter extends Component {
             </IconButton>
             </div>
             <p className={classes.like}>좋아요 {this.props.likeit}개</p>
-            <p>{this.props.context}</p>
+            <span className={classes.spanId}>{this.props.user_id}</span><span>{this.props.context}</span>
             <p className={classes.create_at}><TimeForToday create_at={this.props.create_at}/></p>        
         </div>
     )}

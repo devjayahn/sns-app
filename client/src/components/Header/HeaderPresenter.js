@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
+import PostAdd from '../Modal/PostAdd';
 
 const styles = theme => ({
     large: {
@@ -50,7 +51,7 @@ class HeaderPresenter extends Component {
                         {this.props.introduce}                        
                     </div>
                 </div>
-                <hr></hr>
+                <PostAdd />
             </div>
         )
     }

@@ -33,7 +33,7 @@ class GridPresenter extends Component {
         return(
             <div className={classes.body}>
                 <div className={classes.display}> 
-                    <img src={this.props.feed_image} className={classes.feed_image} />
+                    <img src={this.props.feed_image} className={classes.feed_image} alt={this.props.user_id}/>
                 </div>
             </div>
         )

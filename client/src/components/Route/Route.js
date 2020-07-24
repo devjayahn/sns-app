@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigator from '../Nav/Navigator';
 import FeedContainer from '../Feed/FeedContainer';
 import Home from '../../pages/Home';
-import HeaderContainer from '../Header/HeaderContainer';
-import GridContainer from '../Grid/GridContainer';
 import UserInfo from '../../pages/UserInfo';
 
 

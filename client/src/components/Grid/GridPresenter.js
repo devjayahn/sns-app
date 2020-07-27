@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
+
 const style = theme => ({
     
     body: {
@@ -19,23 +20,21 @@ const style = theme => ({
         marginRight: '27px',
         marginBottom: '27px'
         
-    },
-    display: {        
-        
-    }
+    }    
 });
 
 
 class GridPresenter extends Component {
-    render() {
-        
+    render() {        
         const { classes }  = this.props;
-        return(
+        return(            
+            <div>                        
             <div className={classes.body}>
-                <div className={classes.display}> 
+                <div>
                     <img src={this.props.feed_image} className={classes.feed_image} alt={this.props.user_id}/>
                 </div>
-            </div>
+            </div> 
+            </div>             
         )
     }
 }

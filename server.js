@@ -42,6 +42,14 @@ app.get('/api/:id', (req, res) => {
   })
 });
 
+app.get('/api/feed/:id', (req, res) => {
+  let sql = 'select u.user_id, u.profile_image, f.feed_number, f.context, f.feed_image, f.likeit, f.create_at from sns.feed f INNER JOIN sns.user u ON f.user_id = u.user_id where f.user_id=? order by f.create_at desc';
+  var id = req.params.id;  
+  connection.query(sql, [id], (err, rows) => {
+    res.send(rows);
+  })
+});
+
 app.get('/api/profile/:id', (req, res) => {
   let sql = "select u.user_id, u.nickname, u.profile_image, u.introduce, f.from_user, f.to_user from sns.user u inner join sns.follow f on u.user_id = f.from_user or u.user_id = f.to_user where user_id=?"
   var id = req.params.id;
@@ -60,12 +68,12 @@ app.get('/api/getPost/:id', (req, res) => {
 
 app.use('/image', express.static('./upload'));
 
-app.post('/api/addFeed', upload.single('image'), (req, res) => {
+app.post('/api/addFeed', upload.single('feed_image'), (req, res) => {
   let sql = 'INSERT INTO sns.feed VALUES (null, ?, ?, ?, null, now(), null)';
-  let image = '/image/' + req.file.filename;
   let user_id = req.body.user_id;
-  let context = req.body.context;  
-  let params = [image, user_id, context];
+  let context = req.body.context;
+  let feed_image = '/image/' + req.file.fileName;     
+  let params = [user_id, context, feed_image];
   connection.query(sql, params, (err, rows, fields) => {
     res.send(rows);
   })

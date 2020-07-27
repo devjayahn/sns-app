@@ -5,6 +5,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+import { post } from 'axios';
+import DialogActions from '@material-ui/core/DialogActions';
+
 
 const style = theme => ({
     hidden: {
@@ -41,10 +44,50 @@ class PostAdd extends React.Component {
         })
     }
 
+    handleFormSubmit = (e) => {
+        e.preventDefault()
+        /*
+        this.addPost()
+            .then((response) => {
+                console.log(response.data);                
+            })
+        */
+        this.setState({
+            file: null,
+            user_id: '',
+            context: '',
+            fileName: '',
+            open: false
+        })
+        
+    }
+
+    handleFileChange = (e) => {
+        this.setState({
+            file: e.target.files[0],
+            fileName : e.target.value
+        })
+    }
+
+    handleValueChange = (e) => {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+        
+    }
+
     addPost = () => {
         const url = '/api/addFeed'
         const formData = new FormData();
-        
+        formData.append('feed_image', this.state.file);
+        formData.append('user_id', this.state.user_id);
+        formData.append('context', this.state.context);
+        const config = {
+            headers : {
+                'content-type' : 'multipart/form-data'
+            }
+        }
+        return post(url, formData, config);
     }
 
     render() {
@@ -63,9 +106,13 @@ class PostAdd extends React.Component {
                                 {this.state.fileName === "" ? "Select image" : this.state.fileName}
                             </Button>
                         </label><br/>
-                       <TextField label="ID" type="text" name="user_id" value={this.state.user_id} /><br/>
-                       <TextField label="CONTEXT" type="text" name="context" value={this.state.context} /><br/>
+                       <TextField label="ID" type="text" name="user_id" value={this.state.user_id} onChange={this.handleValueChange} /><br/>
+                       <TextField label="CONTEXT" type="text" name="context" value={this.state.context} onChange={this.handleValueChange} /><br/>
                     </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" color="primary" onClick={this.handleFormSubmit}>Add</Button>
+                        <Button variant="outlined" color="primary" onClick={this.handleClose}>Cancel</Button>                        
+                    </DialogActions>
                 </Dialog>
             </div>            
         )

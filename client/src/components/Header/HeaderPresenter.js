@@ -50,8 +50,8 @@ class HeaderPresenter extends Component {
                     <div className={classes.introduce}>
                         {this.props.introduce}                        
                     </div>
-                </div>
-                <PostAdd />
+                </div> 
+                <PostAdd />              
             </div>
         )
     }

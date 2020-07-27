@@ -10,10 +10,18 @@ class GridContainer extends Component {
         }
       }
 
+      _stateRefresh = () => {
+        this.setState({
+          post:''
+        });
+        this._callApi()
+          .then(res => this.setState({post : res}))    
+          .catch(err => console.log(err));  
+      }
+
       _callApi = async () => {
         const response = await fetch('/api/getPost/'+this.props.id)
-        const body = response.json();
-        console.log(body);
+        const body = response.json();        
         return body;
       }
     

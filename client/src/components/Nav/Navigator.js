@@ -7,7 +7,6 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from "react-router-dom";
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
@@ -83,15 +82,7 @@ class Navigator extends Component {
         const { classes } = this.props;
         return(        
         <AppBar position="static" color="white">
-            <Toolbar>
-            <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="open drawer"
-            >
-                <MenuIcon />
-            </IconButton>
+            <Toolbar>            
             <Typography className={classes.title} variant="h6" align="center" noWrap>
                 <Link to="/home" className={classes.link}>INSTAGRAM</Link> 
             </Typography>            

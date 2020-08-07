@@ -15,7 +15,7 @@ export default () => (
         <Route exact path="/home" component={Home} />
         <Route path="/feeds" component={FeedContainer} />    
         <Route exact path="/:id"  component={UserInfo} />
-        <Route path="/feed/:id"  component={MyFeedContainer} />
+        <Route path="/feed/:id"  component={MyFeedContainer} render={({history}) => (history={history})} />
       </Switch>
     </Router>
   )

@@ -72,7 +72,7 @@ app.post('/api/addFeed', upload.single('feed_image'), (req, res) => {
   let sql = 'INSERT INTO sns.feed VALUES (null, ?, ?, ?, null, now(), null)';
   let user_id = req.body.user_id;
   let context = req.body.context;
-  let feed_image = '/image/' + req.file.fileName;     
+  let feed_image = '/image/' + req.file.filename;  
   let params = [user_id, context, feed_image];
   connection.query(sql, params, (err, rows, fields) => {
     res.send(rows);

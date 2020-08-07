@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import { post } from 'axios';
 import DialogActions from '@material-ui/core/DialogActions';
-
+import { withRouter } from 'react-router-dom';
 
 const style = theme => ({
     hidden: {
@@ -42,24 +42,26 @@ class PostAdd extends React.Component {
             fileName: '',
             open: false
         })
-    }
+    } 
 
+    handleNext = () => {                      
+        this.props.history.push('/feed/'+this.state.user_id);       
+    }
+        
     handleFormSubmit = (e) => {
-        e.preventDefault()
-        /*
+        e.preventDefault()             
         this.addPost()
             .then((response) => {
-                console.log(response.data);                
+                console.log(response.data);
             })
-        */
-        this.setState({
-            file: null,
-            user_id: '',
-            context: '',
-            fileName: '',
-            open: false
+        this.handleNext();
+         this.setState({
+           file: null,
+           user_id: '',
+           context: '',
+           fileName: '',
+           open: false
         })
-        
     }
 
     handleFileChange = (e) => {
@@ -119,4 +121,4 @@ class PostAdd extends React.Component {
     }
 }
 
-export default (withStyles)(style)(PostAdd);
+export default (withRouter)((withStyles)(style)(PostAdd));

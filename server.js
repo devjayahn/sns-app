@@ -79,4 +79,10 @@ app.post('/api/addFeed', upload.single('feed_image'), (req, res) => {
   })
 });
 
+app.post('/api/login', (req, res) => {
+  let sql = "select password from sns.user where user_id=?"
+  let user_id = req.body.user_id;
+  
+})
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

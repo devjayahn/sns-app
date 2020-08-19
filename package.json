@@ -18,7 +18,11 @@
         "mysql": "^2.18.1",
         "query-string": "^6.13.1",
         "react-moment": "^0.9.7",
-        "react-router-dom": "^5.2.0"
+        "react-redux": "^7.2.1",
+        "react-router-dom": "^5.2.0",
+        "redux": "^4.0.5",
+        "redux-promise": "^0.6.0",
+        "redux-thunk": "^2.3.0"
     },
     "devDependencies": {
         "@babel/core": "^7.7.4",

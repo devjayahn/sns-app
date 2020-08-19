@@ -12,7 +12,7 @@ export default () => (
     <Router>      
         <Navigator />
       <Switch>
-        <Route exact path="/home" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/feeds" component={FeedContainer} />    
         <Route exact path="/:id"  component={UserInfo} />
         <Route path="/feed/:id"  component={MyFeedContainer} render={({history}) => (history={history})} />

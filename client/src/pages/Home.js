@@ -4,8 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../actions/userAction";
+import { loginRequest } from "../actions/userAction";
 import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
+import { login } from '../reducers/reducer'
 
 
 const style = theme => ({
@@ -46,14 +48,14 @@ function Home(props) {
     const onSubmitHandler = (e) => {
         e.preventDefault();
         const body = {
-            id: Id,
+            user_id: Id,
             password: Password,
         };
-        dispatch(loginUser(body))
+        dispatch(loginRequest(body))
         .then((res) => {
-            console.log("ID + password" + res);
+            console.log("ID + password : " + Id, Password);
             if(res.payload.loginSuccess) {
-                this.props.history.push("/");
+                props.history.push("/");
             } else {
                 alert(res.payload.message);
             }
@@ -80,5 +82,18 @@ function Home(props) {
         );
     }
 
+    const mapStateToprops = (state) => {
+        return {
+            isLoginPending: state.isLoginPending,
+            isLoginSuccess: state.isLoginSuccess,
+            loginError: state.loginError
+        };
+    }
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            login: (user_id, password) => dispatch(login(user_id, password))
+        };
+    }
 
 export default withRouter((withStyles)(style)(Home));

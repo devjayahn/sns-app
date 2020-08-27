@@ -5,20 +5,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
 
-
-    const style = theme => ({
-
-        modal: {            
-            maxWidth:'md',
-            fullWidth:'true'
-        }
-    })
-
-
-class FollowPresenter extends Component {
-
+class FollowingPresenter extends Component {
+    
     state = { open : false };
 
     handleClickOpen = () => {        
@@ -31,17 +20,16 @@ class FollowPresenter extends Component {
         this.setState({           
             open: false
         })
-    }   
+    } 
 
     render() {
-        const { classes } = this.props;
         return(
             <div>
-            <span onClick={this.handleClickOpen}>Follow {this.props.cnt}</span>
-            <Dialog open={this.state.open} onClose={this.handleClose} className={classes.modal}>
-                    <DialogTitle>Follow</DialogTitle>
+            <span onClick={this.handleClickOpen}>Follower {this.props.cnt}</span>
+            <Dialog open={this.state.open} onClose={this.handleClose}>
+                    <DialogTitle>Follower</DialogTitle>
                     <DialogContent>                        
-                        <div><Link to={location => `/${this.props.to_user}`}>{this.props.to_user}</Link></div>
+                        <div><Link to={location => `/${this.props.from_user}`}>{this.props.from_user}</Link></div>
                     </DialogContent>
                     <DialogActions>                        
                         <Button variant="outlined" color="primary" onClick={this.handleClose}>Cancel</Button>                        
@@ -49,7 +37,9 @@ class FollowPresenter extends Component {
                 </Dialog>
             </div>
         )
+
+
     }
 }
 
-export default (withStyles)(style)(FollowPresenter);
+export default FollowingPresenter;

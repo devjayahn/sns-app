@@ -6,10 +6,14 @@ const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+var bcrypt = require('bcryptjs'); 
 
 const data = fs.readFileSync('./database.json');
 const conf = JSON.parse(data);
 const mysql = require('mysql');
+let cors = require('cors');
+app.use(cors());
+
 
 const connection = mysql.createConnection({
   host: conf.host,
@@ -51,7 +55,7 @@ app.get('/api/feed/:id', (req, res) => {
 });
 
 app.get('/api/profile/:id', (req, res) => {
-  let sql = "select u.user_id, u.nickname, u.profile_image, u.introduce, f.from_user, f.to_user from sns.user u inner join sns.follow f on u.user_id = f.from_user or u.user_id = f.to_user where user_id=?"
+  let sql = "select user_id, nickname, profile_image, introduce from sns.user where user_id=?"
   var id = req.params.id;
   connection.query(sql, [id], (err, rows) => {
     res.send(rows);
@@ -66,10 +70,27 @@ app.get('/api/getPost/:id', (req, res) => {
   })
 });
 
+app.get('/api/follow/:id', (req, res) => {
+  let sql = 'select count(*) as cnt, f.to_user from sns.user u inner join sns.follow f on u.user_id = f.from_user where user_id=?';
+  var id = req.params.id;
+  connection.query(sql, [id], (err, rows) => {
+    res.send(rows);
+  })
+});
+
+app.get('/api/following/:id', (req, res) => {
+  let sql = 'select count(*) as cnt, f.from_user from sns.user u inner join sns.follow f on u.user_id = f.to_user where user_id=?';
+  var id = req.params.id;
+  connection.query(sql, [id], (err, rows) => {
+    res.send(rows);
+  })
+});
+
+
 app.use('/image', express.static('./upload'));
 
 app.post('/api/addFeed', upload.single('feed_image'), (req, res) => {
-  let sql = 'INSERT INTO sns.feed VALUES (null, ?, ?, ?, null, now(), null)';
+  let sql = 'INSERT INTO sns.feed VALUES (null, ?, ?, ?, 0, now(), null)';
   let user_id = req.body.user_id;
   let context = req.body.context;
   let feed_image = '/image/' + req.file.filename;  
@@ -79,10 +100,24 @@ app.post('/api/addFeed', upload.single('feed_image'), (req, res) => {
   })
 });
 
-app.post('/api/login', (req, res) => {
-  let sql = "select password from sns.user where user_id=?"
+app.post('/api/login', (req, res) => {  
   let user_id = req.body.user_id;
-  
-})
+  let password = req.body.password;
+  let sql = 'SELECT * FROM sns.user WHERE user_id = ? LIMIT 1';
+
+    console.log(req.body.user_id, req.body.password);
+    connection.query(sql, [user_id], (err, rows, fields) => {
+      if(password === rows[0].password) {
+        let session = req.session;
+        session.loginInfo = {
+          user_id : rows[0].user_id
+        };
+        
+        return res.json({
+          loginSuccess: true
+        });
+      }      
+  })
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

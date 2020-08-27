@@ -84,7 +84,7 @@ class Navigator extends Component {
         <AppBar position="static" color="white">
             <Toolbar>            
             <Typography className={classes.title} variant="h6" align="center" noWrap>
-                <Link to="/home" className={classes.link}>INSTAGRAM</Link> 
+                <Link to="/" className={classes.link}>INSTAGRAM</Link> 
             </Typography>            
             <Link to="/feeds" ><AccountCircle /></Link>            
                 <div className={classes.search}>

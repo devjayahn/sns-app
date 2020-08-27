@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import { withStyles } from '@material-ui/core/styles';
 import PostAdd from '../Modal/PostAdd';
+import FollowingContainer from '../Follow/FollowingContainer';
+import FollowContainer from '../Follow/FollowContainer';
 
 const styles = theme => ({
     large: {
@@ -45,7 +47,7 @@ class HeaderPresenter extends Component {
                         {this.props.user_id}
                     </div>
                     <div>
-                        <p>Follower 0 Follow 0</p>
+                        <p><FollowingContainer id={this.props.user_id} /> <FollowContainer id={this.props.user_id} /> </p>    
                     </div>                   
                     <div className={classes.introduce}>
                         {this.props.introduce}                        

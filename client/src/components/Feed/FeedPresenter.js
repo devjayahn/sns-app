@@ -32,14 +32,17 @@ const styles = theme => ({
       marginTop: '5px',
       display: 'block',
       backgroundColor: 'white',
-      padding: '10px'
+      padding: '10px',
+      height: '100%'
     },
     spanId: {
       marginRight: '10px',      
       fontWeight: 'bold'
     },
-    spanContext: {
-      
+    img: {
+      maxWidth: '100%',
+      height: '200px',
+      maxHeight: '100%'
     }
   });
 
@@ -52,7 +55,7 @@ class FeedPresenter extends Component {
             <Link to={location => `/${this.props.user_id}`} className={classes.root}><Avatar alt="profile_image" src={this.props.profile_image} /><p className={classes.id}>{this.props.user_id}</p></Link>
             </div>
             <hr/>
-            <img src={this.props.feed_image} alt={this.props.user_id}></img>
+            <img src={this.props.feed_image} className={classes.img} alt={this.props.user_id}></img>
             <div>
             <IconButton aria-label="likeit" color="secondary">
              <FavoriteIcon />           

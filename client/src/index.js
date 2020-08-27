@@ -10,6 +10,7 @@ import promiseMiddlerware from "redux-promise";
 import reduxThunk from "redux-thunk";
 import reducer from "./reducers/reducers"
 
+
 const createStoreWidthMiddleware = applyMiddleware(
   promiseMiddlerware,
   reduxThunk

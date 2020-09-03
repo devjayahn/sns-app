@@ -71,7 +71,7 @@ app.get('/api/getPost/:id', (req, res) => {
 });
 
 app.get('/api/follow/:id', (req, res) => {
-  let sql = 'select count(*) as cnt, f.to_user from sns.user u inner join sns.follow f on u.user_id = f.from_user where user_id=?';
+  let sql = 'select f.to_user from sns.user u inner join sns.follow f on u.user_id = f.from_user where user_id=?';
   var id = req.params.id;
   connection.query(sql, [id], (err, rows) => {
     res.send(rows);
@@ -108,13 +108,8 @@ app.post('/api/login', (req, res) => {
     console.log(req.body.user_id, req.body.password);
     connection.query(sql, [user_id], (err, rows, fields) => {
       if(password === rows[0].password) {
-        let session = req.session;
-        session.loginInfo = {
-          user_id : rows[0].user_id
-        };
-        
         return res.json({
-          loginSuccess: true
+          login: true
         });
       }      
   })

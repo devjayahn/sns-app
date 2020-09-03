@@ -31,6 +31,9 @@ const styles = theme => ({
       },
       introduce: {
           marginTop: '20px'
+      },
+      cursor: {
+          cursor: 'pointer'
       }
   });
 
@@ -47,7 +50,8 @@ class HeaderPresenter extends Component {
                         {this.props.user_id}
                     </div>
                     <div>
-                        <p><FollowingContainer id={this.props.user_id} /> <FollowContainer id={this.props.user_id} /> </p>    
+                        <p className={classes.cursor}><FollowingContainer id={this.props.user_id} /></p>
+                        <p className={classes.cursor}><FollowContainer id={this.props.user_id} /> </p>    
                     </div>                   
                     <div className={classes.introduce}>
                         {this.props.introduce}                        

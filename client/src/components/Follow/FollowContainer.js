@@ -55,8 +55,7 @@ class FollowContainer extends Component {
        <span onClick={this.handleClickOpen}>Follow {count}</span>
         {
           this.state.follow ? this.state.follow.map((f, idx) =>
-          <div>
-            {f.to_user}{idx}
+          <div>            
           <Dialog open={this.state.open} onClose={this.handleClose}>
                   <DialogTitle>Follow</DialogTitle>
                   <DialogContent>                        
